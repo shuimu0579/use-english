@@ -1,1 +1,3 @@
 I admit, I don't always tread lightly and take baby steps, but whenever things get tough, my first instinct is to scale back my stride. Particularly in the process of refactoring, if my tests flop and I can't promptly pinpoint and rectify the issue, I backtrack to my last good commit and replay my steps more minutely. This tactic works because I make frequent commits and these small increments are instrumental in quick progress, especially when grappling with tough code.
+
+我承认我并不总是像这样迈小步那样小心翼翼，但每当事情变得困难时，我的第一反应就是采取更小的步伐。特别是在重构过程中，如果测试失败，如果我不能立即找到并解决问题，我会回滚到上一个良好的提交，然后用更小的步骤重新做一遍刚才做的事情。这样做是有效的，因为我提交得如此频繁，而且小步骤是快速前进的关键，特别是在处理困难的代码时。
