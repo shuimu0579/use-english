@@ -3,6 +3,8 @@ function ListNode(val, next) {
   this.next = next;
 }
 
+// 链接：https://www.codecrush.cn/oj/problem/7
+
 /**
  * Definition for singly-linked list.
  * function ListNode(val, next) {

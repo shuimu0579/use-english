@@ -6,7 +6,7 @@
  * }
  */
 
-// https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/
+// leetCode链接地址: https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/
 
 function ListNode(val, next) {
   this.val = val === undefined ? 0 : val;

@@ -6,9 +6,11 @@
  * }
  */
 
-function ListNode(val, next) {
-    this.val = val;
-    this.next = next;
+// 链接：www.codecrush.cn/oj/problem/6
+
+https: function ListNode(val, next) {
+  this.val = val;
+  this.next = next;
 }
 
 /**
@@ -17,29 +19,29 @@ function ListNode(val, next) {
  * @returns {ListNode}
  */
 var insert = function (head, value) {
-    if (!head) return new ListNode(value, null);
+  if (!head) return new ListNode(value, null);
 
-    var newHead = new ListNode(null, head);
-    var prev = newHead;
-    var node = head;
-    var a;
-    while (node) {
-        if (prev.val <= value && node.val >= value) {
-            break;
-        }
-        prev = node;
-
-        node = node.next;
+  var newHead = new ListNode(null, head);
+  var prev = newHead;
+  var node = head;
+  var a;
+  while (node) {
+    if (prev.val <= value && node.val >= value) {
+      break;
     }
-    if (!node) {
-        a = new ListNode(value, node);
-        prev.next = a;
-    }
+    prev = node;
 
+    node = node.next;
+  }
+  if (!node) {
     a = new ListNode(value, node);
     prev.next = a;
+  }
 
-    return newHead.next;
+  a = new ListNode(value, node);
+  prev.next = a;
+
+  return newHead.next;
 };
 
 var head = { val: 1, next: { val: 5, next: null } };
