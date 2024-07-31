@@ -1,6 +1,5 @@
 /**
  * @param {number[]} arr
- 
  * @return {boolean}
  */
 var canMakeArithmeticProgression = function (arr) {
@@ -64,6 +63,39 @@ var canMakeArithmeticProgression = function (arr) {
   };
   var quickSort = quickSortList(arr);
 
+  // 归并排序
+  // var mergeSortList = function (arr = []) {
+  //   if (arr.length <= 1) {
+  //     return arr;
+  //   }
+
+  //   var middle = Math.floor(arr.length / 2);
+  //   var leftArr = arr.slice(0, middle);
+  //   var rightArr = arr.slice(middle);
+
+  //   return merge(mergeSortList(leftArr), mergeSortList(rightArr));
+  // };
+  // function merge(left = [], right = []) {
+  //   var result = [];
+  //   var leftIndex = 0;
+  //   var rightIndex = 0;
+
+  //   while (leftIndex < left.length && rightIndex < right.length) {
+  //     if (left[leftIndex] < right[rightIndex]) {
+  //       result.push(left[leftIndex]);
+  //       leftIndex++;
+  //     } else {
+  //       result.push(right[rightIndex]);
+  //       rightIndex++;
+  //     }
+  //   }
+
+  //   result = [...result, ...left.slice(leftIndex), ...right.slice(rightIndex)];
+
+  //   return result;
+  // }
+  // var quickSort = mergeSortList(arr);
+
   // 判断是不是等差数列
   var diff = quickSort[1] - quickSort[0];
   for (var i = 0; i < quickSort.length - 1; i++) {
@@ -75,6 +107,7 @@ var canMakeArithmeticProgression = function (arr) {
   return true;
 };
 
-const arr = [1, 2, 4];
+// const arr = [1, 2, 4];
+const arr = [1, 3, 5];
 
 console.log(canMakeArithmeticProgression(arr));
