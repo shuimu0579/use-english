@@ -44,24 +44,70 @@ var canMakeArithmeticProgression = function (arr) {
   //     quickSort[j+1] = current;
   // }
 
-  // 快速排序--取中法
-  var quickSortList = function (arr = []) {
-    if (arr && arr.length <= 1) {
-      return arr;
+  // 快速排序01--下面的实现 是原地排序算法
+  // ```
+  // 快速排序的核心思想和实现步骤如下：
+  // 1、选择基准值（Pivot）：
+  //   在这个实现中，我们选择数组的最后一个元素作为基准值。
+  // 2、分区（Partition）过程：
+  //   partition 函数负责将数组分成两部分，使得左边的元素都小于或等于基准值，右边的元素都大于基准值。
+  //   使用两个指针 i 和 j：
+  //     i 指向小于等于基准值的最后一个元素的位置。
+  //     j 用于遍历数组。
+  //   当 arr[j] <= pivot 时，增加 i 并交换 arr[i] 和 arr[j]。
+  //   最后，将基准值放到正确的位置（i + 1）。
+  // 3、 递归排序：
+  // 对基准值左右两边的子数组递归应用快速排序。
+  // 4、基本情况：
+  // 当子数组的长度为 1 或 0 时，停止递归。
+  // ```;
+  var quickSortList = function (arr = [], left = 0, right = arr.length - 1) {
+    if (left < right) {
+      var pivot = getPivot(arr, left, right);
+      quickSortList(arr, left, pivot - 1);
+      quickSortList(arr, pivot + 1, right);
     }
 
-    var polit = arr[Math.floor(arr.length / 2)];
-    var leftArr = arr.filter((i) => i < polit);
-    var middleArr = arr.filter((i) => i === polit);
-    var rightArr = arr.filter((i) => i > polit);
-
-    return [
-      ...quickSortList(leftArr),
-      ...middleArr,
-      ...quickSortList(rightArr),
-    ];
+    return arr;
   };
+  function getPivot(arr, left, right) {
+    var pivot = arr[right];
+    var i = left - 1;
+
+    for (var j = left; j < right; j++) {
+      if (arr[j] <= pivot) {
+        i++;
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+
+      // [arr[i + 1], arr[right]] = [arr[right], arr[i + 1]];
+    }
+
+    [arr[i + 1], arr[right]] = [arr[right], arr[i + 1]];
+
+    return i + 1;
+  }
   var quickSort = quickSortList(arr);
+  console.log(quickSort);
+
+  // 快速排序02--取中法--下面的实现不是原地排序算法
+  // var quickSortList = function (arr = []) {
+  //   if (arr && arr.length <= 1) {
+  //     return arr;
+  //   }
+
+  //   var polit = arr[Math.floor(arr.length / 2)];
+  //   var leftArr = arr.filter((i) => i < polit);
+  //   var middleArr = arr.filter((i) => i === polit);
+  //   var rightArr = arr.filter((i) => i > polit);
+
+  //   return [
+  //     ...quickSortList(leftArr),
+  //     ...middleArr,
+  //     ...quickSortList(rightArr),
+  //   ];
+  // };
+  // var quickSort = quickSortList(arr);
 
   // 归并排序
   // var mergeSortList = function (arr = []) {
