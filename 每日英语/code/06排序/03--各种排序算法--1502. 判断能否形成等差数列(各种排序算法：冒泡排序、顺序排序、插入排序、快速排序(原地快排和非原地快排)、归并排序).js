@@ -30,19 +30,23 @@ var canMakeArithmeticProgression = function (arr) {
   //       }
   //   }
 
-  // 插入排序
-  // var quickSort = arr;
-  // for(var i = 1; i < quickSort.length; i++){
-  //     var current = quickSort[i];
-  //     var j = i - 1;
+  // 插入排序算法
+  var quickSort = arr;
+  for (var i = 1; i < quickSort.length; i++) {
+    // 当前要插入的元素
+    var current = quickSort[i];
+    // j 指向已排序部分的最后一个元素
+    var j = i - 1;
 
-  //     while(j >= 0 && quickSort[j] > current){
-  //         quickSort[j+1] = quickSort[j];
-  //         j--;
-  //     }
+    // 将比 current 大的元素向右移动
+    while (j >= 0 && quickSort[j] >= current) {
+      quickSort[j + 1] = quickSort[j];
+      j--;
+    }
 
-  //     quickSort[j+1] = current;
-  // }
+    // 在正确的位置插入 current
+    quickSort[j + 1] = current;
+  }
 
   // 快速排序01--下面的实现 是原地排序算法
   // ```
@@ -61,34 +65,35 @@ var canMakeArithmeticProgression = function (arr) {
   // 4、基本情况：
   // 当子数组的长度为 1 或 0 时，停止递归。
   // ```;
-  var quickSortList = function (arr = [], left = 0, right = arr.length - 1) {
+  // 快速排序--原地排序
+  function quickSortList(arr, left, right) {
+    // left < right  递归中终止条件, 一定要添加
     if (left < right) {
-      var pivot = getPivot(arr, left, right);
-      quickSortList(arr, left, pivot - 1);
-      quickSortList(arr, pivot + 1, right);
-    }
+      var povit = getPovit(arr, left, right);
 
-    return arr;
-  };
-  function getPivot(arr, left, right) {
-    var pivot = arr[right];
+      quickSortList(arr, left, povit - 1);
+      quickSortList(arr, povit + 1, right);
+    }
+  }
+  function getPovit(arr, left, right) {
+    var povit = arr[right];
     var i = left - 1;
 
     for (var j = left; j < right; j++) {
-      if (arr[j] <= pivot) {
+      if (arr[j] <= povit) {
         i++;
+        // arr[i] = arr[j];
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
-
-      // [arr[i + 1], arr[right]] = [arr[right], arr[i + 1]];
     }
 
+    // [arr[i+1], povit] = [povit, arr[i+1]];
     [arr[i + 1], arr[right]] = [arr[right], arr[i + 1]];
 
     return i + 1;
   }
-  var quickSort = quickSortList(arr);
-  console.log(quickSort);
+  quickSortList(arr, 0, arr.length - 1);
+  var quickSort = arr;
 
   // 快速排序02--取中法--下面的实现不是原地排序算法
   // var quickSortList = function (arr = []) {
@@ -110,37 +115,49 @@ var canMakeArithmeticProgression = function (arr) {
   // var quickSort = quickSortList(arr);
 
   // 归并排序
-  // var mergeSortList = function (arr = []) {
-  //   if (arr.length <= 1) {
-  //     return arr;
-  //   }
+  var mergeSortList = function (arr = []) {
+    if (arr.length <= 1) return arr;
 
-  //   var middle = Math.floor(arr.length / 2);
-  //   var leftArr = arr.slice(0, middle);
-  //   var rightArr = arr.slice(middle);
+    var mid = arr.length / 2;
+    var leftList = arr.slice(0, mid);
+    var rightList = arr.slice(mid);
 
-  //   return merge(mergeSortList(leftArr), mergeSortList(rightArr));
-  // };
-  // function merge(left = [], right = []) {
-  //   var result = [];
-  //   var leftIndex = 0;
-  //   var rightIndex = 0;
+    // return merge(leftList, rightList);
+    return merge(mergeSortList(leftList), mergeSortList(rightList));
+  };
+  function merge(leftList, rightList) {
+    var result = [];
 
-  //   while (leftIndex < left.length && rightIndex < right.length) {
-  //     if (left[leftIndex] < right[rightIndex]) {
-  //       result.push(left[leftIndex]);
-  //       leftIndex++;
-  //     } else {
-  //       result.push(right[rightIndex]);
-  //       rightIndex++;
-  //     }
-  //   }
+    var leftIndex = 0;
+    var rightIndex = 0;
+    while (leftIndex < leftList.length && rightIndex < rightList.length) {
+      if (leftList[leftIndex] < rightList[rightIndex]) {
+        result.push(leftList[leftIndex]);
+        leftIndex++;
+      } else {
+        result.push(rightList[rightIndex]);
+        rightIndex++;
+      }
+    }
 
-  //   result = [...result, ...left.slice(leftIndex), ...right.slice(rightIndex)];
+    // if(leftIndex < leftList.length){
+    //     result.push(leftList[leftIndex]);
+    // }
+    while (leftIndex < leftList.length) {
+      result.push(leftList[leftIndex]);
+      leftIndex++;
+    }
+    // if(rightIndex < rightList.length){
+    //     result.push(rightList[rightIndex]);
+    // }
+    while (rightIndex < rightList.length) {
+      result.push(rightList[rightIndex]);
+      rightIndex++;
+    }
 
-  //   return result;
-  // }
-  // var quickSort = mergeSortList(arr);
+    return result;
+  }
+  var quickSort = mergeSortList(arr);
 
   // 判断是不是等差数列
   var diff = quickSort[1] - quickSort[0];

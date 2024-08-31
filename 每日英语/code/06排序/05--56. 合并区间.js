@@ -3,9 +3,6 @@
  * @return {number[][]}
  */
 
-/**
- * 超出时间限制
- */
 var merge = function (intervals) {
   if (intervals.length <= 1) {
     return intervals;
