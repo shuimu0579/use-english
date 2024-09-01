@@ -12,11 +12,12 @@ var sortColors = function (nums) {
   //     }
   // }
 
-  // 选择排序
+  // 选择排序 nums[j] < nums[minIndex] 而不是 nums[j] < nums[i]
   // for(var i = 0; i <= nums.length -1; i++){
   //     var minIndex = i;
 
   //     for(var j = i + 1; j <= nums.length -1; j++){
+  //         // if(nums[j] < nums[i]){
   //         if(nums[j] < nums[minIndex]){
   //             minIndex = j;
   //         }
