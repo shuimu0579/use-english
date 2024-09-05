@@ -8,7 +8,8 @@ var canMakeArithmeticProgression = function (arr) {
   // 冒泡排序
   // var quickSort = arr;
   // for(var i = 0; i < quickSort.length; i++){
-  //     for(var j = 0; j < quickSort.length - i; j++){
+  //     // for(var j = 0; j < quickSort.length - i; j++){
+  //     for(var j = 0; j < quickSort.length - i -1; j++){
   //         if(quickSort[j] > quickSort[j+1]){
   //             [quickSort[j], quickSort[j+1]] = [quickSort[j+1], quickSort[j]]
   //         }
