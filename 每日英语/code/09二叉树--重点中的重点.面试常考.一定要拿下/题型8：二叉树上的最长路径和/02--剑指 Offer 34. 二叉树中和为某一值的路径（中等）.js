@@ -1,3 +1,19 @@
+// ## 回溯代码模板
+
+// ```
+// result = []
+// def backtrack(可选列表, 决策阶段, 路径):
+//     if 满足结束条件(所有决策都已完成或得到可行解):
+//         if路径为可行解：result.add(路径)
+//         return
+
+//     for 选择 in [可选列表]:
+//         # 做选择
+//         路径.add(选择)
+//         backtrack(可选列表, 决策阶段, 路径)
+//         # 撤销选择
+// ```
+
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -13,6 +29,8 @@
  */
 var pathTarget = function (root, target) {
   var list = []; // 存储所有符合条件的路径
+
+  // root 可选列表, count 决策阶段, path 路径
 
   function dfs(root, count, path) {
     if (!root) return; // 如果节点为空，直接返回
