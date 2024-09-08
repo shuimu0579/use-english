@@ -1,10 +1,11 @@
 // 00--3、最值--有 [2,2,4,6,3,1] 个物品，一件物品可以装很多次，选择其中一些物品装入背包，正好装满背包 13 所需物品最少个数（如果装不满，返回-1）？ （最值）
-function pack(weight, n, w) {
+function pack(weight, count, n, w) {
   var dp = new Array(n)
     .fill()
     .map(() => new Array(w + 1).fill(Number.MAX_SAFE_INTEGER));
 
-  var k = w / weight[0];
+  // var k = w / weight[0];
+  var k = Math.min(count[0], w / weight[0]);
   dp[0][0] = 0;
   for (let i = 1; i <= k; i++) {
     // dp[0][i * weight[0]] = 1;
@@ -13,7 +14,8 @@ function pack(weight, n, w) {
 
   for (let i = 1; i < n; i++) {
     for (let j = 0; j <= w; j++) {
-      let k = j / weight[i];
+      // let k = j / weight[i];
+      let k = Math.min(count[i], j / weight[i]);
       var min = dp[i - 1][j];
       for (let r = 1; r <= k; r++) {
         if (dp[i - 1][j - r * weight[i]] !== Number.MAX_SAFE_INTEGER) {
@@ -29,5 +31,5 @@ function pack(weight, n, w) {
   // return dp[n - 1][w];
 }
 
-var a = pack([2, 2, 4, 6, 3, 1], 6, 15); // 3次 6-6-3
+var a = pack([2, 2, 4, 6, 3, 1], [0, 0, 1, 1, 1, 1], 6, 15); // 3次 6-6-3
 console.log(a);
