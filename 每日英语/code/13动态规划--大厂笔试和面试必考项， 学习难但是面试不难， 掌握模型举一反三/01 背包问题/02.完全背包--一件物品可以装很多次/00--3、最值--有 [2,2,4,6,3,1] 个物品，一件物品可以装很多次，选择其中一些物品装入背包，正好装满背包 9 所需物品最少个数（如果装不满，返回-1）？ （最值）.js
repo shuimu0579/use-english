@@ -14,8 +14,20 @@ function pack(weight, n, w) {
   for (let i = 1; i < n; i++) {
     for (let j = 0; j <= w; j++) {
       let k = j / weight[i];
-      var min = dp[i - 1][j];
-      for (let r = 1; r <= k; r++) {
+      // 方式 1
+      // var min = dp[i - 1][j];
+      // for (let r = 1; r <= k; r++) {
+      //   // min = Math.min(min, dp[i-1][j-r*weight[i]] + r)
+      //   // 这个if判断非常重要，用于剪枝
+      //   if (dp[i - 1][j - r * weight[i]] !== Number.MAX_SAFE_INTEGER) {
+      //     // min = Math.min(min, dp[i - 1][j - r * weight[i]]);
+      //     min = Math.min(min, dp[i - 1][j - r * weight[i]] + r);
+      //   }
+      // }
+
+      // 方式 2
+      var min = Number.MIN_SAFE_INTEGER;
+      for (let r = 0; r <= k; r++) {
         // min = Math.min(min, dp[i-1][j-r*weight[i]] + r)
         // 这个if判断非常重要，用于剪枝
         if (dp[i - 1][j - r * weight[i]] !== Number.MAX_SAFE_INTEGER) {
@@ -23,6 +35,7 @@ function pack(weight, n, w) {
           min = Math.min(min, dp[i - 1][j - r * weight[i]] + r);
         }
       }
+
       dp[i][j] = min;
     }
   }
