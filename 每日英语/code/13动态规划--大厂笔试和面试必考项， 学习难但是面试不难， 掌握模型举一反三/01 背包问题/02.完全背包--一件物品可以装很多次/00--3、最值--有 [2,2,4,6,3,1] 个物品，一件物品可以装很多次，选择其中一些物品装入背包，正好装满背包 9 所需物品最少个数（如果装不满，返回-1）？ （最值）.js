@@ -16,6 +16,8 @@ function pack(weight, n, w) {
       let k = j / weight[i];
       var min = dp[i - 1][j];
       for (let r = 1; r <= k; r++) {
+        // min = Math.min(min, dp[i-1][j-r*weight[i]] + r)
+        // 这个if判断非常重要，用于剪枝
         if (dp[i - 1][j - r * weight[i]] !== Number.MAX_SAFE_INTEGER) {
           // min = Math.min(min, dp[i - 1][j - r * weight[i]]);
           min = Math.min(min, dp[i - 1][j - r * weight[i]] + r);
