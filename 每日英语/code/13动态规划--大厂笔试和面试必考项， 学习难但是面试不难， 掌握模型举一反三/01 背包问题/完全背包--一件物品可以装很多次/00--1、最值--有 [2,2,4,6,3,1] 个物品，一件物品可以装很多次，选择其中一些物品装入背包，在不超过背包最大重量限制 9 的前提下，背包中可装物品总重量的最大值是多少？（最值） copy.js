@@ -29,5 +29,5 @@ function pack(weight, n, w) {
   }
 }
 
-var a = pack([2, 2, 4, 6], 4, 9);
+var a = pack([2, 2, 4, 6, 3, 1], 6, 9);
 console.log(a);
