@@ -4,6 +4,7 @@ function pack(weight, n, w) {
     .fill()
     .map(() => new Array(w + 1).fill(Number.MAX_SAFE_INTEGER));
 
+  Number.MIN_SAFE_INTEGER;
   // 没装就不算物品个数，所以 dp[0][0] = 0
   // dp[0][0] = 1;
   dp[0][0] = 0;
