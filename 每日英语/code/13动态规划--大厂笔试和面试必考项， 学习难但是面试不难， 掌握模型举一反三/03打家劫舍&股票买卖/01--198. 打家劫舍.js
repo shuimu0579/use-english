@@ -1,0 +1,26 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function (nums) {
+  var m = nums.length;
+  var n = 2;
+  var dp = new Array(m)
+    .fill()
+    .map(() => new Array(n).fill(Number.MIN_SAFE_INTEGER));
+
+  dp[0][0] = 0;
+  dp[0][1] = nums[0];
+
+  for (let i = 1; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (j === 0) {
+        dp[i][j] = Math.max(dp[i - 1][0], dp[i - 1][1]);
+      } else {
+        dp[i][j] = dp[i - 1][0] + nums[i];
+      }
+    }
+  }
+
+  return Math.max(dp[m - 1][0], dp[m - 1][1]);
+};
