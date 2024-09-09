@@ -22,11 +22,11 @@ var coinChange = function (coins, amount) {
       var min = dp[i - 1][j];
       for (let r = 1; r <= k; r++) {
         // min = Math.min(min, dp[i-1][j-r*coins[i]] + r)
-        // 这个if判断非常重要，用于剪枝
-        if (dp[i - 1][j - r * coins[i]] !== Number.MAX_SAFE_INTEGER) {
-          // min = Math.min(min, dp[i - 1][j - r * weight[i]]);
-          min = Math.min(min, dp[i - 1][j - r * coins[i]] + r);
-        }
+        // 这个if判断非常重要，用于剪枝, 当然不加也是可以的
+        // if (dp[i - 1][j - r * coins[i]] !== Number.MAX_SAFE_INTEGER) {
+        // min = Math.min(min, dp[i - 1][j - r * weight[i]]);
+        min = Math.min(min, dp[i - 1][j - r * coins[i]] + r);
+        // }
       }
       dp[i][j] = min;
     }

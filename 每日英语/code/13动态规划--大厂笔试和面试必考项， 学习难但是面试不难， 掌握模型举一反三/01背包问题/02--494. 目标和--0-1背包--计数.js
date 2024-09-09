@@ -26,12 +26,23 @@ var findTargetSumWays = function (nums, target) {
       //     dp[i][j] = dp[i-1][j+nums[i]];
       // }
 
+      // 方式 1
+      // if (j - nums[i] >= 0 && j - nums[i] <= m) {
+      //   dp[i][j] = dp[i - 1][j - nums[i]];
+      // }
+      // if (j + nums[i] >= 0 && j + nums[i] <= m) {
+      //   dp[i][j] += dp[i - 1][j + nums[i]];
+      // }
+
+      //方式 2
+      var sum = 0;
       if (j - nums[i] >= 0 && j - nums[i] <= m) {
-        dp[i][j] = dp[i - 1][j - nums[i]];
+        sum += dp[i - 1][j - nums[i]];
       }
       if (j + nums[i] >= 0 && j + nums[i] <= m) {
-        dp[i][j] += dp[i - 1][j + nums[i]];
+        sum += dp[i - 1][j + nums[i]];
       }
+      dp[i][j] = sum;
     }
   }
 
