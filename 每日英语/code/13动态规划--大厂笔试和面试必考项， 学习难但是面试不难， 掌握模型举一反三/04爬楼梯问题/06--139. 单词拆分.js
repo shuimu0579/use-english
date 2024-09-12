@@ -4,6 +4,32 @@
  * @return {boolean}
  */
 
+// 一个单词一个单词的匹配，这样好理解一些
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+var wordBreak = function (s, wordDict) {
+  var n = s.length;
+  var dp = new Array(n + 1).fill(false);
+  dp[0] = true;
+
+  for (let i = 1; i <= n; i++) {
+    for (let word of wordDict) {
+      let len = word.length;
+      let start = i - len;
+      if (start >= 0 && s.startsWith(word, start) && dp[i - len]) {
+        dp[i] = true;
+        break;
+      }
+    }
+  }
+
+  return dp[n];
+};
+
+// 下面这种方式一个字符一个字符的匹配，是很不好理解的。
 ```
 为什么是  for(let j = 0; j < i; j++)
 
