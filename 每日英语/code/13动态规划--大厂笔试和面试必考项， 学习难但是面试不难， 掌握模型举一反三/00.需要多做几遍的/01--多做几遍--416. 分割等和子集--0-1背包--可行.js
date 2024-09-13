@@ -1,3 +1,4 @@
+// https://leetcode.cn/problems/partition-equal-subset-sum/description/
 // 背包模型--2、有 n 个物品，选择其中一些物品装入背包，能不能正好装满背包？（可行）
 
 /**

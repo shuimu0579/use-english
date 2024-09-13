@@ -4,7 +4,7 @@
  * @return {number}
  */
 var uniquePaths = function (m, n) {
-  var dp = new Array(m).fill().map(() => new Array(n).fill(0));
+  var dp = new Array(m).fill(null).map(() => new Array(n).fill(0));
 
   for (let i = 0; i < m; i++) {
     dp[i][0] = 1;
@@ -15,7 +15,7 @@ var uniquePaths = function (m, n) {
 
   for (let i = 1; i < m; i++) {
     for (let j = 1; j < n; j++) {
-      dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+      dp[i][j] = dp[i][j - 1] + dp[i - 1][j];
     }
   }
 
