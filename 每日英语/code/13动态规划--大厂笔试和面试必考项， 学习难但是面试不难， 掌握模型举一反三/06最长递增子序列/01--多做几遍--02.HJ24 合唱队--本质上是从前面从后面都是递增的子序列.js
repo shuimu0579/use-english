@@ -10,63 +10,42 @@ var arr = [];
 rl.on("line", function (line) {
   arr.push(line);
 });
+
 rl.on("close", function () {
-  arr.shift();
-  var list = arr[0].split(" ").map(Number);
-  let n = list.length;
+  var strings = arr[1];
+  var nums = strings.split(" ").map(Number);
+  var n = nums.length;
 
-  let dpAdd = new Array(n).fill(Number.MIN_SAFE_INTEGER);
-  dpAdd[0] = 1;
-  for (let i = 1; i < n; i++) {
-    let max = Number.MIN_SAFE_INTEGER;
+  var dp = new Array(n).fill(1);
+  dp[0] = 1;
+  for (let i = 1; i <= n - 1; i++) {
+    let max = 0;
     for (let j = 0; j < i; j++) {
-      if (list[j] < list[i]) {
-        max = Math.max(max, dpAdd[j]);
+      if (nums[j] < nums[i]) {
+        max = Math.max(max, dp[j]);
       }
     }
-    if (max !== Number.MIN_SAFE_INTEGER) {
-      dpAdd[i] = max + 1;
-    } else {
-      dpAdd[i] = 1;
-    }
+    dp[i] = max + 1;
   }
-  // var countMax = Number.MIN_SAFE_INTEGER;
-  // for (let i = 0; i < n; i++) {
-  //     countMax = Math.max(countMax, dpAdd[i]);
-  // }
 
-  let dpDecrease = new Array(n).fill(Number.MIN_SAFE_INTEGER);
-  dpDecrease[0] = 1;
-  for (let i = list.length - 2; i > 0; i--) {
-    // 从后向前遍历
-    // for (let i = 1; i < n; i++) {
-    let max = Number.MIN_SAFE_INTEGER;
-    for (let j = list.length - 1; j > i; j--) {
-      // 从后向前遍历
-      if (list[j] < list[i]) {
-        max = Math.max(max, dpDecrease[j]);
+  var dpReverse = new Array(n).fill(1);
+  dpReverse[n - 1] = 1;
+  for (let i = n - 2; i >= 0; i--) {
+    let max = 0;
+    for (let j = n - 1; j > i; j--) {
+      if (nums[j] < nums[i]) {
+        max = Math.max(max, dpReverse[j]);
       }
     }
-    if (max !== Number.MIN_SAFE_INTEGER) {
-      dpDecrease[i] = max + 1;
-    } else {
-      dpDecrease[i] = 1;
-    }
+    dpReverse[i] = max + 1;
   }
-  // var countDeMax = Number.MIN_SAFE_INTEGER;
-  // for (let i = 0; i < n; i++) {
-  //     countDeMax = Math.max(countDeMax, dpDecrease[i]);
-  // }
 
-  // var count = list.length - (countMax + countDeMax - 1);
-
-  var countMax = Number.MIN_SAFE_INTEGER;
-  for (let i = 0; i < n; i++) {
-    countMax = Math.max(countMax, dpAdd[i] + dpDecrease[i] - 1);
+  var count = 0;
+  for (let i = 0; i <= n - 1; i++) {
+    count = Math.max(count, dp[i] + dpReverse[i] - 1);
   }
-  var count = list.length - countMax;
-
-  console.log(count);
+  var total = n - count;
+  console.log(total);
 });
 
 // 下面这样计算有问题：

@@ -10,13 +10,11 @@
  */
 var lengthOfLIS = function (nums) {
   var n = nums.length;
-  var dp = new Array(n).fill(Number.MIN_SAFE_INTEGER);
+  var dp = new Array(n).fill(1);
 
   dp[0] = 1;
-
-  for (let i = 1; i < n; i++) {
-    let max = Number.MIN_SAFE_INTEGER;
-
+  for (let i = 1; i <= n - 1; i++) {
+    var max = Number.MIN_SAFE_INTEGER;
     for (let j = 0; j < i; j++) {
       if (nums[j] < nums[i]) {
         max = Math.max(max, dp[j]);
@@ -30,23 +28,21 @@ var lengthOfLIS = function (nums) {
     }
   }
 
-  let max = 0;
-  for (let i = 0; i < n; i++) {
-    max = Math.max(max, dp[i]);
+  var count = Number.MIN_SAFE_INTEGER;
+  for (let i = 0; i <= n - 1; i++) {
+    count = Math.max(count, dp[i]);
   }
 
-  return max;
+  return count;
 };
 
 // 方式 2
 var lengthOfLIS = function (nums) {
   var n = nums.length;
-  // var dp = new Array(n).fill(Number.MIN_SAFE_INTEGER);
   var dp = new Array(n).fill(1);
 
   dp[0] = 1;
   for (let i = 1; i < n; i++) {
-    // var max = Number.MIN_SAFE_INTEGER;
     var max = 0;
     for (let j = 0; j < i; j++) {
       if (nums[j] < nums[i]) {
@@ -56,7 +52,7 @@ var lengthOfLIS = function (nums) {
     dp[i] = max + 1;
   }
 
-  var max = Number.MIN_SAFE_INTEGER;
+  var max = 0;
   for (let i = 0; i < n; i++) {
     max = Math.max(max, dp[i]);
   }
