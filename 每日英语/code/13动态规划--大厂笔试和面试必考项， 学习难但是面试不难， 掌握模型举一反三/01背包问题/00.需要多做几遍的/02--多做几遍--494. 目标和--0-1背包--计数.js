@@ -6,48 +6,33 @@
  * @return {number}
  */
 var findTargetSumWays = function (nums, target) {
-  var n = nums.length;
+  var m = nums.length;
   var offset = 1000;
-  var m = 2000;
+  // dp = new Array(m).fill(null).map(() => new Array(2*offset + 1).fill(0));
+  var n = 2000;
+  dp = new Array(m).fill(null).map(() => new Array(n + 1).fill(0));
 
-  var dp = new Array(n).fill().map(() => new Array(m + 1).fill(0));
   // dp[0][offset-nums[0]] = 1;
   // dp[0][offset+nums[0]] = 1;
-  dp[0][offset + nums[0]] += 1;
   dp[0][offset - nums[0]] += 1;
+  dp[0][offset + nums[0]] += 1;
 
-  for (let i = 1; i < n; i++) {
-    for (let j = 0; j <= m; j++) {
-      // if(j-nums[i] >= 0 && j+nums[i] <= m){
-      //     dp[i][j] = dp[i-1][j-nums[i]] + dp[i-1][j+nums[i]];
-      // }else if(j-nums[i] >= 0){
-      //     dp[i][j] = dp[i-1][j-nums[i]]
-      // }else if(j+nums[i] <= m){
-      //     dp[i][j] = dp[i-1][j+nums[i]];
-      // }
-
-      // 方式 1
-      // if (j - nums[i] >= 0 && j - nums[i] <= m) {
-      //   dp[i][j] = dp[i - 1][j - nums[i]];
-      // }
-      // if (j + nums[i] >= 0 && j + nums[i] <= m) {
-      //   dp[i][j] += dp[i - 1][j + nums[i]];
-      // }
-
-      //方式 2
-      var sum = 0;
-      if (j - nums[i] >= 0 && j - nums[i] <= m) {
-        sum += dp[i - 1][j - nums[i]];
+  for (let i = 1; i < m; i++) {
+    // for(let j = 0; j <= offset; j++){
+    for (let j = 0; j <= n; j++) {
+      // if(j-nums[i] >=0 && j-nums[i] <=offset){
+      if (j - nums[i] >= 0 && j - nums[i] <= n) {
+        dp[i][j] += dp[i - 1][j - nums[i]];
       }
-      if (j + nums[i] >= 0 && j + nums[i] <= m) {
-        sum += dp[i - 1][j + nums[i]];
+      // if(j + nums[i] >=0 && j + nums[i] <= offset){
+      if (j + nums[i] >= 0 && j + nums[i] <= n) {
+        dp[i][j] += dp[i - 1][j + nums[i]];
       }
-      dp[i][j] = sum;
     }
   }
 
-  return target + offset <= m && target + offset >= 0
-    ? dp[n - 1][target + offset]
+  return offset + target >= 0 && offset + target <= n
+    ? dp[m - 1][offset + target]
     : 0;
 };
 
