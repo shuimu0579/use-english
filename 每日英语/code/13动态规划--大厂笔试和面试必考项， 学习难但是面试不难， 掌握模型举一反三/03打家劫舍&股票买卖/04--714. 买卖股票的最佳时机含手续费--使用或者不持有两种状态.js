@@ -1,4 +1,5 @@
 // 状态定义为： 持有股票、不持有股票
+// https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
 
 /**
  * @param {number[]} prices
@@ -9,24 +10,19 @@ var maxProfit = function (prices, fee) {
   var m = prices.length;
   var n = 2;
   var dp = new Array(m)
-    .fill()
+    .fill(null)
     .map(() => new Array(n).fill(Number.MIN_SAFE_INTEGER));
 
-  // 0 代表 持有股票； 1 代表 不持有股票
-  dp[0][0] = -prices[0];
-  dp[0][1] = 0;
+  // 0代表不持有 1代表持有
+  dp[0][0] = 0;
+  dp[0][1] = -prices[0];
 
   for (let i = 1; i < m; i++) {
-    dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
-    dp[i][1] = Math.max(dp[i - 1][0] + prices[i] - fee, dp[i - 1][1]);
+    dp[i][0] = Math.max(dp[i - 1][1] + prices[i] - fee, dp[i - 1][0]);
+    dp[i][1] = Math.max(dp[i - 1][0] - prices[i], dp[i - 1][1]);
   }
 
-  let max = Number.MIN_SAFE_INTEGER;
-  for (let i = 0; i < n; i++) {
-    max = Math.max(max, dp[m - 1][i]);
-  }
-
-  return max;
+  return Math.max(dp[m - 1][0], dp[m - 1][1]);
 };
 
 // 下面的状态定义有问题  买 卖 不动， 这样的状态定义有问题

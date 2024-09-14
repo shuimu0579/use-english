@@ -5,38 +5,41 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
-  if (prices.length === 1) return 0;
-
   var m = prices.length;
   var n = 4;
   var dp = new Array(m)
-    .fill()
+    .fill(null)
     .map(() => new Array(n).fill(Number.MIN_SAFE_INTEGER));
 
-  // 0 持有
-  // 1 不持有(当天卖出)
-  // 2 不持有(当天为冷冻期，昨天卖出的)
-  // 3 不持有(当天为非冷冻期，昨天也没持有)
+  // 分持有股票和不持有股票两种主状态，其中不持有股票🈶️有三种子状态。
+  // 持有为 0，
+  // 不持有(当天卖出)为 1，
+  // 不持有(当天是冷冻期,昨天卖出)为 2；
+  // 不持有(当前为非冷冻期，昨天也没持有)3；
   dp[0][0] = -prices[0];
   dp[0][1] = 0;
   dp[0][2] = 0;
   dp[0][3] = 0;
 
   for (let i = 1; i < m; i++) {
+    // 当天持有：昨天持有，当天没操作dp[i-1][0]。。。昨天没持有，当天买的（昨天冷冻期，当天买dp[i-1][2]-prices[i]。。。昨天不是冷冻期，当天买dp[i-1][3]-prices[i]）
     dp[i][0] = Math.max(
-      dp[i - 1][3] - prices[i],
-      Math.max(dp[i - 1][2] - prices[i], dp[i - 1][0])
+      dp[i - 1][0],
+      Math.max(dp[i - 1][2] - prices[i], dp[i - 1][3] - prices[i])
     );
+    // 当天不持有：当天就卖出了
     dp[i][1] = dp[i - 1][0] + prices[i];
+    // 当天不持有：当天为冷冻期：昨天卖出了。
     dp[i][2] = dp[i - 1][1];
+    // 当天不持有：当天为非冷冻期,昨天也没持有：可能昨天是冷冻期，前天卖的dp[i-1][2]。。。有可能是昨天不是冷冻期，前天也没有持有dp[i-1][1]。。。
+    // dp[i][3] =  Math.max(dp[i-1][2], dp[i-1][1]);
     dp[i][3] = Math.max(dp[i - 1][2], dp[i - 1][3]);
   }
 
-  let max = Number.MIN_SAFE_INTEGER;
+  var max = Number.MIN_SAFE_INTEGER;
   for (let i = 0; i < n; i++) {
     max = Math.max(max, dp[m - 1][i]);
   }
-
   return max;
 };
 

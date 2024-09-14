@@ -18,28 +18,33 @@
  * @param {number} bamboo_len
  * @return {number}
  */
+/**
+ * @param {number} bamboo_len
+ * @return {number}
+ */
 var cuttingBamboo = function (bamboo_len) {
-  var n = bamboo_len;
-  if (n === 1) return 1;
-  if (n === 2) return 1;
-  if (n === 3) return 2;
+  var m = bamboo_len;
+  // 竹子长度为 1,2,3，被砍时，产生的最大长度。
+  if (m === 1) return 1;
+  if (m === 2) return 1;
+  if (m === 3) return 2;
 
-  var dp = new Array(n + 1).fill(0);
-
-  dp[0] = 1;
+  // dp[i]代表长度为i的情况下，不管有没有切割，竹子的最大长度。
+  var dp = new Array(m + 1).fill(0);
+  dp[0] = 0;
   dp[1] = 1;
-  for (let i = 2; i < n + 1; i++) {
-    // 一定要初始化为0
-    var max = 0;
+  dp[2] = 2;
+  dp[3] = 3;
+
+  for (let i = 4; i <= m; i++) {
+    let max = Number.MIN_SAFE_INTEGER;
     for (let j = 1; j <= i; j++) {
-      // for (let j = 1; j < i; j++) {
-      // max = Math.max(max, j * dp[n-j])
       max = Math.max(max, j * dp[i - j]);
     }
     dp[i] = max;
   }
 
-  return dp[n];
+  return dp[m];
 };
 
 // 下面这种解法不好理解
