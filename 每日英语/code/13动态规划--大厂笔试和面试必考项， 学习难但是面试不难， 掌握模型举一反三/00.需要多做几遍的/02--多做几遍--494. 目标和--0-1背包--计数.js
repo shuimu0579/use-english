@@ -6,35 +6,31 @@
  * @param {number} target
  * @return {number}
  */
-var findTargetSumWays = function (nums, target) {
-  var m = nums.length;
-  var offset = 1000;
-  // dp = new Array(m).fill(null).map(() => new Array(2*offset + 1).fill(0));
-  var n = 2000;
-  dp = new Array(m).fill(null).map(() => new Array(n + 1).fill(0));
+var findTargetSumWays = function(nums, target) {
+    var offset = 1000;
+    var m = nums.length;
+    var n = 1000 * 2;
 
-  // dp[0][offset-nums[0]] = 1;
-  // dp[0][offset+nums[0]] = 1;
-  dp[0][offset - nums[0]] += 1;
-  dp[0][offset + nums[0]] += 1;
+    var dp = new Array(m).fill(null).map(() => new Array(n + 1).fill(0));
 
-  for (let i = 1; i < m; i++) {
-    // for(let j = 0; j <= offset; j++){
-    for (let j = 0; j <= n; j++) {
-      // if(j-nums[i] >=0 && j-nums[i] <=offset){
-      if (j - nums[i] >= 0 && j - nums[i] <= n) {
-        dp[i][j] += dp[i - 1][j - nums[i]];
-      }
-      // if(j + nums[i] >=0 && j + nums[i] <= offset){
-      if (j + nums[i] >= 0 && j + nums[i] <= n) {
-        dp[i][j] += dp[i - 1][j + nums[i]];
-      }
+    dp[0][offset - nums[0]] += 1;
+    dp[0][offset + nums[0]] += 1;
+
+    for(let i = 1; i < m; i++){
+        for(let j = 0; j <= n; j++){
+
+            if(j- nums[i] >= 0 && j - nums[i] <= n){
+                dp[i][j] += dp[i-1][j-nums[i]]
+            }
+
+            if(j + nums[i] >= 0 && j + nums[i] <= n){
+                dp[i][j] += dp[i-1][j+nums[i]]
+            }
+            
+        }
     }
-  }
 
-  return offset + target >= 0 && offset + target <= n
-    ? dp[m - 1][offset + target]
-    : 0;
+    return dp[m-1][offset + target]
 };
 
 // 使用 回溯的方式
