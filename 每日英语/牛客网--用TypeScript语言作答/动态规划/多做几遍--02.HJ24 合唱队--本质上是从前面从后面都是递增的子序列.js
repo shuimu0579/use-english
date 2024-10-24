@@ -36,7 +36,7 @@ rl.on("close", function () {
   // }
 
   let dpDecrease = new Array(n).fill(Number.MIN_SAFE_INTEGER);
-  dpDecrease[0] = 1;
+  dpDecrease[list.length - 1] = 1;
   for (let i = list.length - 2; i > 0; i--) {
     // 从后向前遍历
     // for (let i = 1; i < n; i++) {
