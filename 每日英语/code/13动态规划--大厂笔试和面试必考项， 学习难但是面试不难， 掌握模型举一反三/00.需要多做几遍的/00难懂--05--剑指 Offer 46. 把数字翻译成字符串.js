@@ -1,7 +1,7 @@
 // dp[i] = dp[i-1] + dp[i-2](必须是可翻译的，06就不可翻译)
 // 想想 506 这种情况  预期为 1
 // Number(str) <= 25 && Number(str) >= 10 才能说明 str是可翻译的
-// str = 06, 这个 06是不可翻译的。所以只能max = Math.max(max, dp[i - 1])
+// str = 06, 这个 06是不可翻译的。
 /**
  * @param {number} ciphertext
  * @return {number}
