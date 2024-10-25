@@ -6,23 +6,22 @@
  * @param {number} fee
  * @return {number}
  */
-var maxProfit = function (prices, fee) {
-  var m = prices.length;
-  var n = 2;
-  var dp = new Array(m)
-    .fill(null)
-    .map(() => new Array(n).fill(Number.MIN_SAFE_INTEGER));
+var maxProfit = function(prices, fee) {
+    var m = prices.length;
+    var n = 2;
+    var dp = new Array(m).fill(null).map(() => new Array(n).fill(Number.MIN_SAFE_INTEGER));
 
-  // 0代表不持有 1代表持有
-  dp[0][0] = 0;
-  dp[0][1] = -prices[0];
+    // 0代表不持有， 1 代表持有
+    dp[0][0] = 0;
+    // dp[0][1] = prices[0];
+    dp[0][1] = -prices[0];
 
-  for (let i = 1; i < m; i++) {
-    dp[i][0] = Math.max(dp[i - 1][1] + prices[i] - fee, dp[i - 1][0]);
-    dp[i][1] = Math.max(dp[i - 1][0] - prices[i], dp[i - 1][1]);
-  }
+    for(let i = 1; i < m; i++){
+        dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i] - fee);
+        dp[i][1] = Math.max(dp[i-1][1], dp[i-1][0] - prices[i]);
+    }
 
-  return Math.max(dp[m - 1][0], dp[m - 1][1]);
+    return Math.max(dp[m-1][0], dp[m-1][1]);
 };
 
 // 下面的状态定义有问题  买 卖 不动， 这样的状态定义有问题
