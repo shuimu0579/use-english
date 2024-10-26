@@ -47,13 +47,19 @@ var decorateRecord = function (root) {
   var list = [];
   var queue = [root];
   while (queue.length > 0) {
-    var levelSize = queue.length;
-    var currentLevel = [];
+    var index = queue.length;
+    var levelList = [];
 
-    for (var i = 0; i < levelSize; i++) {
+    for (let i = 0; i < index; i++) {
+      // levelList.push(queue[i].val);
+      // if(queue[i].left){
+      //     queue.push(queue[i].left);
+      // }
+      // if(queue[i].right){
+      //     queue.push(queue[i].right);
+      // }
       var node = queue.shift();
-      currentLevel.push(node.val);
-
+      levelList.push(node.val);
       if (node.left) {
         queue.push(node.left);
       }
@@ -62,7 +68,7 @@ var decorateRecord = function (root) {
       }
     }
 
-    list.push(...currentLevel);
+    list.push(...levelList);
   }
 
   return list;
