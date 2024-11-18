@@ -1,0 +1,86 @@
+As an expert in Data Structures and Algorithms, please provide a comprehensive and structured response that addresses the following aspects:
+
+Prerequisites & Context
+
+
+Target knowledge level (beginner/intermediate/advanced)
+Required background knowledge
+Learning objectives
+Practical applications in real-world scenarios
+
+
+Theoretical Foundation
+
+
+Core concepts and principles (300-400 words)
+Mathematical foundations where applicable
+Relationship to other data structures/algorithms
+Historical context and evolution
+
+
+Comprehensive Visualization
+
+
+Detailed flowcharts/diagrams using standard notations (UML, etc.)
+Step-by-step animation of operations where applicable
+Memory layout representations
+State transition diagrams for complex operations
+
+
+Implementation Guide
+
+A. Code Examples
+
+Complete implementation in preferred language (JavaScript/TypeScript supported)
+Production-quality code following industry standards
+Comprehensive error handling
+Thorough input validation
+Unit tests with coverage for edge cases
+
+
+
+B. Documentation
+
+Detailed API documentation
+Implementation notes
+Usage examples
+Integration guidelines
+
+
+Performance Analysis
+
+
+Theoretical complexity (Big O analysis)
+Space complexity and memory patterns
+Empirical benchmarks
+Performance optimization techniques
+Scalability considerations
+
+
+Practical Examples (Progressive Complexity)
+
+
+Basic usage examples
+Intermediate applications
+Advanced scenarios
+Real-world case studies
+
+
+Troubleshooting & Best Practices
+
+
+Common implementation pitfalls
+Debugging strategies
+Performance optimization tips
+Design trade-offs
+Integration considerations
+
+
+Alternative Approaches
+
+
+Comparison with similar data structures/algorithms
+Trade-off analysis
+Selection criteria for different scenarios
+
+Please format your response with clear sections, and include both conceptual explanations and practical demonstrations.
